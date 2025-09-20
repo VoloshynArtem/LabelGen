@@ -1,6 +1,6 @@
 
 export default function Print(items){
-  var iframe = document.createElement('iframe');
+  var iframe = document.createElement("iframe");
   
     
   var html = `
@@ -19,12 +19,11 @@ export default function Print(items){
 
       div.dotted {
         border: 1px solid black;
-        
-        height: 16mm;
         display: flex;
-        align-items: center; 
-        justify-content: center; 
         box-sizing: border-box;
+        
+        padding-inline: 1mm;
+        height: 16mm;
         font-size: 16mm; 
       }
       
@@ -45,12 +44,13 @@ export default function Print(items){
          html += `<div class="dotted">` + i.text + `</div>`;
        }
       
-  html += '</html>'  
+  html += "</html>"  
 ;
     document.body.appendChild(iframe);
-    iframe.style.display = 'none';
+    iframe.style.display = "none";
     iframe.contentWindow.document.open();
     iframe.contentWindow.document.write(html);
     iframe.contentWindow.document.close();
     iframe.contentWindow.print();
 }
+
