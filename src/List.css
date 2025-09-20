@@ -1,0 +1,30 @@
+div.list {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px; 
+    outline: none;
+}
+
+button.listButton {
+
+    transition: border 0.1s ease;
+    transition: background 0.25s ease;
+  
+}
+
+button.listButton:hover {
+    border-color: #ff0000;
+    background: #ff0000;
+    box-shadow: 0 0 8px #ff3b3b99,
+              0 0 20px #ff3b3b66;
+    animation: wiggle 0.2s ease-in-out infinite;
+}
+
+
+
+@keyframes wiggle {
+    0% {rotate: 0deg;}
+    25% {rotate: -1deg;}
+    80% {rotate: 1deg;}
+}
