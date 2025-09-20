@@ -30,8 +30,8 @@ export default function Print(items){
       
       body{
           display: flex;
+          flex-wrap: wrap;
           margin: 4.2 mm;
-          top: 
       }
       
     </style>
