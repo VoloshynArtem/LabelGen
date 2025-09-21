@@ -29,9 +29,7 @@ function App() {
 
         </div>
 
-        
-        
-
+      
       </LabelItems.Provider>
 
 
@@ -53,8 +51,6 @@ function Input() {
     
 
     const value = e.target.elements.form.value;
-
-    console.log(value.length);
 
     if(value.length >0){
       setitems(previtems => [
@@ -83,7 +79,7 @@ function PrintButton(){
   const {items} = useContext(LabelItems);
   
   function handleClick() {
-    Print(items);
+    Print(items, 16);// TODO: pull from inputform
   }
   
   return(

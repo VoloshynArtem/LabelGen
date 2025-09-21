@@ -1,8 +1,7 @@
 
-export default function Print(items){
+export default function Print(items, maxH = Infinity, maxW = Infinity){
   var iframe = document.createElement("iframe");
   
-    
   var html = `
   <!DOCTYPE html>
   <html>
@@ -17,14 +16,20 @@ export default function Print(items){
         margin: 0;
       }
 
-      div.dotted {
+      div.label {
         border: 1px solid black;
         display: flex;
         box-sizing: border-box;
         padding-inline: 1mm;
         align-items: center; 
-        height: 16mm;
-        font-size: 16mm; 
+        `
+        
+        html += "max-height:" +maxH + "mm;";
+        html += "max-width:" +maxW + ";";
+        html += "font-size: " + Math.min(maxH, maxW) + "mm;";
+        
+        html += `
+        
       }
       
       body{
@@ -41,7 +46,7 @@ export default function Print(items){
       `
       
       for(const i of [...items].reverse()){
-         html += `<div class="dotted">` + i.text + `</div>`;
+         html += `<div class="label">` + i.text + `</div>`;
        }
       
   html += "</html>"  
