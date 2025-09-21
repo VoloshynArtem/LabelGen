@@ -21,8 +21,8 @@ export default function Print(items){
         border: 1px solid black;
         display: flex;
         box-sizing: border-box;
-        
         padding-inline: 1mm;
+        align-items: center; 
         height: 16mm;
         font-size: 16mm; 
       }
@@ -38,9 +38,9 @@ export default function Print(items){
   </head>
 
   <body>
-      ` 
-
-      for(const i of items.reverse()){
+      `
+      
+      for(const i of [...items].reverse()){
          html += `<div class="dotted">` + i.text + `</div>`;
        }
       

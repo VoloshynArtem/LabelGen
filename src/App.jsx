@@ -1,4 +1,6 @@
-import { useState, createContext, useContext } from "react";
+import { useState, createContext, useContext, useRef } from "react";
+import { motion } from "framer-motion";
+
 import Print from "./Print.jsx";
 import "./App.css";
 import "./List.css"
@@ -40,10 +42,9 @@ function App() {
 
 
 function SubmitButton(){
-
   return <button type="submit" form="form">Submit</button>
-
 }
+
 
 function Input() {
   const { items, setitems } = useContext(LabelItems);
@@ -95,21 +96,29 @@ function PrintButton(){
 
 
 
-
-
 function List(){
+  const wasDragged = useRef(false);
   const { items, setitems } = useContext(LabelItems);
   
   function deleteItem(id){
-    setitems(prevItems => prevItems.filter(item => item.id !== id));
-  
+    if(!wasDragged.current){
+      setitems(prevItems => prevItems.filter(item => item.id !== id));
+    }
   }
   
     return <div className="list">
         {items.map(item => (
-          <button className="listButton" key={item.id} onClick={() => deleteItem(item.id)}>
+          <motion.button className="listButton" 
+            key={item.id} 
+            onClick={() => deleteItem(item.id)}
+            onDragStart={() => (wasDragged.current = true)}
+            onDragEnd={() => (wasDragged.current = false)}
+            drag
+            dragSnapToOrigin
+            dragTransition={{ bounceStiffness: 1200, bounceDamping: 20 }}
+          >
             {item.text}
-          </button>
+          </motion.button>
         ))}
       </div>
 }
