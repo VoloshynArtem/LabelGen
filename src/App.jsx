@@ -22,13 +22,7 @@ function App() {
           <List />
         </div>
         
-
-        <div className="controlls">
-          <SubmitButton />
-          <PrintButton />
-
-        </div>
-
+        <Controlls />
       
       </LabelItems.Provider>
 
@@ -39,9 +33,6 @@ function App() {
 
 
 
-function SubmitButton(){
-  return <button type="submit" form="form">Submit</button>
-}
 
 
 function Input() {
@@ -75,16 +66,37 @@ function Input() {
   
 }
 
-function PrintButton(){
+function Controlls(){
   const {items} = useContext(LabelItems);
+  const dimensions = {width: useRef(),height: useRef()};
   
   function handleClick() {
-    Print(items, 16);// TODO: pull from inputform
+    Print(items, dimensions["width"].current, dimensions["height"].current);
   }
+
+
+  function handleSetSize(e){
+    e.preventDefault();
+    dimensions[e.target.name].current = e.target.value
+  }
+
+
   
   return(
-    <div>
+    <div className="controlls">
+      <button type="submit" form="form">Submit</button>
+      
       <button onClick={handleClick}> print </button >
+
+      <form onChange={handleSetSize} onSubmit={(e) => {e.preventDefault()}}>
+        <input type="text" name="width" size="4" maxLength="4"/>
+      </form>
+      
+
+      <form onChange={handleSetSize} onSubmit={(e) => {e.preventDefault()}}>
+        <input type="text" name="height" size="4" maxLength="4"/>
+      </form>
+
     </div>
 
   )
@@ -118,6 +130,7 @@ function List(){
         ))}
       </div>
 }
+
 export default App;
 
 

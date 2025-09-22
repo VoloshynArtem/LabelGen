@@ -1,5 +1,5 @@
 
-export default function Print(items, maxH = Infinity, maxW = Infinity){
+export default function Print(items, maxW = Infinity, maxH = Infinity){
   var iframe = document.createElement("iframe");
   
   var html = `
