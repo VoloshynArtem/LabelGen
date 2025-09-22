@@ -1,5 +1,5 @@
 import { useState, createContext, useContext, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 import Print from "./Print.jsx";
 import "./App.css";
@@ -115,8 +115,13 @@ function List(){
   }
   
     return <div className="list">
+      <AnimatePresence initial={false}>
         {items.map(item => (
           <motion.button className="listButton" 
+            initial={{scaleX: 0}}
+            animate={{scaleX: 1}}
+            exit={{scaleX: 0}}
+
             key={item.id} 
             onClick={() => deleteItem(item.id)}
             onDragStart={() => (wasDragged.current = true)}
@@ -128,6 +133,8 @@ function List(){
             {item.text}
           </motion.button>
         ))}
+
+      </AnimatePresence>
       </div>
 }
 
