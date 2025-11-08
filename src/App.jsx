@@ -6,6 +6,8 @@ import "./App.css";
 import "./List.css"
 import "./Input.css";
 
+import Popup from 'reactjs-popup';
+
 
 const LabelItems = createContext();
 
@@ -74,34 +76,46 @@ function Controlls(){
     Print(items, dimensions["width"].current, dimensions["height"].current);
   }
 
-
-  function handleSetSize(e){
-    e.preventDefault();
-    dimensions[e.target.name].current = e.target.value
-  }
-
-
   
   return(
     <div className="controlls">
       <button type="submit" form="form">Submit</button>
       
       <button onClick={handleClick}> print </button >
-
-      <form onChange={handleSetSize} onSubmit={(e) => {e.preventDefault()}}>
-        <input type="text" name="width" size="4" maxLength="4"/>
-      </form>
-      
-
-      <form onChange={handleSetSize} onSubmit={(e) => {e.preventDefault()}}>
-        <input type="text" name="height" size="4" maxLength="4"/>
-      </form>
+      <Popup trigger={<button className="button">Settings</button>} modal>
+        {close => <Settings close={close} dimensions={dimensions} />}
+      </Popup>
 
     </div>
 
   )
 }
 
+
+
+function Settings({close, dimensions}){
+  function handleSetSize(e){
+    e.preventDefault();
+    dimensions[e.target.name].current = e.target.value
+  }
+
+  return (
+    <div className="settings">
+      <form className="settingsForm" onChange={handleSetSize} onSubmit={(e) => e.preventDefault()}>
+        <label>Width:</label>
+        <input className="settingsInput" type="text" name="width" size="4" maxLength="4" />
+      </form>
+
+      <form className="settingsForm" onChange={handleSetSize} onSubmit={(e) => e.preventDefault()}>
+        <label>Height:</label>
+         <input className="settingsInput" type="text" name="height" size="4" maxLength="4" />
+      </form>
+      
+      <button className="closeButton" onClick={close}>Close</button>
+    </div>
+  );
+
+}
 
 
 function List(){
