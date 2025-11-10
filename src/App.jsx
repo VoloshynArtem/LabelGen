@@ -7,6 +7,9 @@ import "./List.css"
 import "./Input.css";
 
 import Popup from 'reactjs-popup';
+import TextareaAutosize from 'react-textarea-autosize';
+
+
 
 
 const LabelItems = createContext();
@@ -34,11 +37,9 @@ function App() {
 }
 
 
-
-
-
 function Input() {
   const { items, setitems } = useContext(LabelItems);
+  
   function handleSubmit(e) {
     e.preventDefault();
     
@@ -54,14 +55,20 @@ function Input() {
       e.target.reset();
     
     }
-  
   }
+  
+  function handleKeyDown(e){
+    if(e.keyCode == 13 && e.shiftKey == false) {
+      e.preventDefault();
+      e.target.form.requestSubmit();
+    }
+}
+
 
   return (
     <div>
-      <form id="form" onSubmit={handleSubmit}>
-        <input name="form" type="text" />
-
+      <form id="form" onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
+        <TextareaAutosize className="input" name="form" type="text"> </TextareaAutosize>
       </form>
     </div>
   );
@@ -80,11 +87,11 @@ function Controlls(){
   return(
     <div className="controlls">
       <button type="submit" form="form">Submit</button>
-      
-      <button onClick={handleClick}> print </button >
       <Popup trigger={<button className="button">Settings</button>} modal>
         {close => <Settings close={close} dimensions={dimensions} />}
       </Popup>
+      <button onClick={handleClick}> print </button >
+
 
     </div>
 

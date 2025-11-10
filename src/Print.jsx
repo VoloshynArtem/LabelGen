@@ -21,7 +21,8 @@ export default function Print(items, maxW = Infinity, maxH = Infinity){
         display: flex;
         box-sizing: border-box;
         padding-inline: 1mm;
-        align-items: center; 
+        align-items: center;
+        white-space: pre;
         `
         
         html += "max-height:" +maxH + "mm;";

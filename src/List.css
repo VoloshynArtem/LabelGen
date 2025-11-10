@@ -7,7 +7,7 @@ div.list {
 }
 
 button.listButton {
-
+    white-space: pre;
     transition: border 0.1s ease;
     transition: background 0.25s ease;
   
