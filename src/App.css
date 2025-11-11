@@ -71,7 +71,7 @@ button.closeButton{
 
 .settingsForm{
   display: flex;
-  gap: 2vw;
+  gap: 2rem;
 
 }
 

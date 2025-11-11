@@ -1,13 +1,16 @@
 
 export default function Print(items, maxW = Infinity, maxH = Infinity){
   var iframe = document.createElement("iframe");
+  if(maxW == "")
+    maxW = Infinity;
+  if(maxH == "")
+    maxH = Infinity;
   
   var html = `
   <!DOCTYPE html>
   <html>
 
   <head>
-    <script type="text/javascript" src="script.js"></script>
 
     <style>
       
@@ -23,20 +26,15 @@ export default function Print(items, maxW = Infinity, maxH = Infinity){
         padding-inline: 1mm;
         align-items: center;
         white-space: pre;
-        `
-        
-        html += "max-height:" +maxH + "mm;";
-        html += "max-width:" +maxW + ";";
-        html += "font-size: " + Math.min(maxH, maxW) + "mm;";
-        
-        html += `
-        
+        max-width: ${maxW}mm;
+        font-size: ${Math.min(maxH, maxW)}mm;
+        line-height: ${Math.min(maxH, maxW)}mm; 
       }
       
       body{
-          display: flex;
-          flex-wrap: wrap;
-          margin: 4.2 mm;
+        display: flex;
+        flex-wrap: wrap;
+        margin: 4.2 mm;
       }
       
     </style>
@@ -44,14 +42,15 @@ export default function Print(items, maxW = Infinity, maxH = Infinity){
   </head>
 
   <body>
-      `
+`
       
       for(const i of [...items].reverse()){
-         html += `<div class="label">` + i.text + `</div>`;
+        html += `<div class="label" style="max-height:${maxH * i.text.split('\n').length }mm;">${i.text}</div>\n`;
        }
       
-  html += "</html>"  
-;
+  html += `
+  </body>  
+  </html>`;
     document.body.appendChild(iframe);
     iframe.style.display = "none";
     iframe.contentWindow.document.open();

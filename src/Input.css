@@ -1,3 +1,14 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
 .input {
     resize: none;
     border-radius: 8px;
@@ -13,6 +24,7 @@
 
     outline: 0px;
     overflow: hidden;
+    margin-bottom: -5.9px; /* yep */
 }
 
 .input:hover {

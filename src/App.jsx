@@ -1,18 +1,14 @@
-import { useState, createContext, useContext, useRef } from "react";
+import { useState, useContext, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-import Print from "./Print.jsx";
+import Controlls from "./Controlls.jsx";
+import LabelItemsContext from "./Context.jsx";
 import "./App.css";
 import "./List.css"
 import "./Input.css";
 
-import Popup from 'reactjs-popup';
 import TextareaAutosize from 'react-textarea-autosize';
 
-
-
-
-const LabelItems = createContext();
 
 function App() {
    const [items, setitems] = useState([]);
@@ -20,7 +16,7 @@ function App() {
   return (
     
     <div className="app">
-      <LabelItems.Provider value={{ items, setitems }}>
+      <LabelItemsContext.Provider value={{ items, setitems }}>
         
         <div>
           <Input />
@@ -29,7 +25,7 @@ function App() {
         
         <Controlls />
       
-      </LabelItems.Provider>
+      </LabelItemsContext.Provider>
 
 
     </div>
@@ -38,7 +34,7 @@ function App() {
 
 
 function Input() {
-  const { items, setitems } = useContext(LabelItems);
+  const { items, setitems } = useContext(LabelItemsContext);
   
   function handleSubmit(e) {
     e.preventDefault();
@@ -68,66 +64,17 @@ function Input() {
   return (
     <div>
       <form id="form" onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
-        <TextareaAutosize className="input" name="form" type="text"> </TextareaAutosize>
+        <TextareaAutosize className="input" name="form" type="text"></TextareaAutosize>
       </form>
     </div>
   );
   
-}
-
-function Controlls(){
-  const {items} = useContext(LabelItems);
-  const dimensions = {width: useRef(),height: useRef()};
-  
-  function handleClick() {
-    Print(items, dimensions["width"].current, dimensions["height"].current);
-  }
-
-  
-  return(
-    <div className="controlls">
-      <button type="submit" form="form">Submit</button>
-      <Popup trigger={<button className="button">Settings</button>} modal>
-        {close => <Settings close={close} dimensions={dimensions} />}
-      </Popup>
-      <button onClick={handleClick}> print </button >
-
-
-    </div>
-
-  )
-}
-
-
-
-function Settings({close, dimensions}){
-  function handleSetSize(e){
-    e.preventDefault();
-    dimensions[e.target.name].current = e.target.value
-  }
-
-  return (
-    <div className="settings">
-      <form className="settingsForm" onChange={handleSetSize} onSubmit={(e) => e.preventDefault()}>
-        <label>Width:</label>
-        <input className="settingsInput" type="text" name="width" size="4" maxLength="4" />
-      </form>
-
-      <form className="settingsForm" onChange={handleSetSize} onSubmit={(e) => e.preventDefault()}>
-        <label>Height:</label>
-         <input className="settingsInput" type="text" name="height" size="4" maxLength="4" />
-      </form>
-      
-      <button className="closeButton" onClick={close}>Close</button>
-    </div>
-  );
-
 }
 
 
 function List(){
   const wasDragged = useRef(false);
-  const { items, setitems } = useContext(LabelItems);
+  const { items, setitems } = useContext(LabelItemsContext);
   
   function deleteItem(id){
     if(!wasDragged.current){

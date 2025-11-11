@@ -2,7 +2,7 @@ div.list {
     margin-top: 16px;
     display: flex;
     flex-direction: column;
-    gap: 12px; 
+    gap: 16px; 
     outline: none;
 }
 
