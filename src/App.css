@@ -80,3 +80,20 @@ button.closeButton{
 
 
 }
+
+
+@keyframes popupAnimation {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    background: rgba(0,0,0,1);
+    opacity: 1;
+  }
+}
+.popup-content {
+  -webkit-animation: popupAnimation 0.15s forwards;
+
+}
