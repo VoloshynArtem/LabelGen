@@ -27,8 +27,7 @@ export default function Print(items, maxW = Infinity, maxH = Infinity){
         align-items: center;
         white-space: pre;
         max-width: ${maxW}mm;
-        font-size: ${Math.min(maxH, maxW)}mm;
-        line-height: ${Math.min(maxH, maxW)}mm; 
+        line-height: ${maxH}mm; 
       }
       
       body{
@@ -45,7 +44,8 @@ export default function Print(items, maxW = Infinity, maxH = Infinity){
 `
       
       for(const i of [...items].reverse()){
-        html += `<div class="label" style="max-height:${maxH * i.text.split('\n').length }mm;">${i.text}</div>\n`;
+        let longestSet = Math.max(...i.text.split('\n').map(line => line.length));
+        html += `<div class="label" style="max-height:${maxH * i.text.split('\n').length}mm; font-size:${Math.min(maxW/longestSet, maxH)}mm">${i.text}</div>\n`;
        }
       
   html += `
