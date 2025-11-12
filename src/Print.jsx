@@ -1,10 +1,8 @@
 
-export default function Print(items, maxW = Infinity, maxH = Infinity){
+export default function Print(items, parameters){
   var iframe = document.createElement("iframe");
-  if(maxW == "")
-    maxW = Infinity;
-  if(maxH == "")
-    maxH = Infinity;
+  parameters.width.current = (typeof parameters.width.current === 'undefined') ? Infinity : parameters.width.current;
+  parameters.height.current = (typeof parameters.height.current === 'undefined') ? Infinity : parameters.height.current;
   
   var html = `
   <!DOCTYPE html>
@@ -20,14 +18,14 @@ export default function Print(items, maxW = Infinity, maxH = Infinity){
       }
 
       div.label {
-        border: 1px solid black;
+        border: 1px ${parameters.border.current};
         display: flex;
         box-sizing: border-box;
         padding-inline: 1mm;
         align-items: center;
         white-space: pre;
-        max-width: ${maxW}mm;
-        line-height: ${maxH}mm; 
+        max-width: ${parameters.width.current}mm;
+        line-height: ${parameters.height.current}mm; 
       }
       
       body{
@@ -43,19 +41,19 @@ export default function Print(items, maxW = Infinity, maxH = Infinity){
   <body>
 `
       
-      for(const i of [...items].reverse()){
-        let longestSet = Math.max(...i.text.split('\n').map(line => line.length));
-        html += `<div class="label" style="max-height:${maxH * i.text.split('\n').length}mm; font-size:${Math.min(maxW/longestSet, maxH)}mm">${i.text}</div>\n`;
-       }
+  for(const i of [...items].reverse()){
+    let longestSet = Math.max(...i.text.split('\n').map(line => line.length));
+    html += `<div class="label" style="max-height:${parameters.height.current * i.text.split('\n').length}mm; font-size:${Math.min(parameters.width.current/longestSet, parameters.height.current)}mm">${i.text}</div>\n`;
+  }
       
   html += `
   </body>  
   </html>`;
-    document.body.appendChild(iframe);
-    iframe.style.display = "none";
-    iframe.contentWindow.document.open();
-    iframe.contentWindow.document.write(html);
-    iframe.contentWindow.document.close();
-    iframe.contentWindow.print();
+  document.body.appendChild(iframe);
+  iframe.style.display = "none";
+  iframe.contentWindow.document.open();
+  iframe.contentWindow.document.write(html);
+  iframe.contentWindow.document.close();
+  iframe.contentWindow.print();
 }
 
