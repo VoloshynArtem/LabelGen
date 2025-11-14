@@ -43,17 +43,17 @@ function Settings({close, printParameters}){
     <div className="settings">
       <form className="settingsForm" onChange={handleSetSize} onSubmit={(e) => e.preventDefault()}>
         <label className= "settingsLabel" data-tooltip-id="tooltip" data-tooltip-content="sets the maximum width of each label in mm" >Width:</label>
-        <input className="settingsInput input" type="number" defaultValue={printParameters.width.current} name="width" min="0" max="9999" autocomplete="off" />
+        <input className="input settingsInput" type="number" defaultValue={printParameters.width.current} name="width" min="0" max="9999" autocomplete="off" />
       </form>
 
     <form className="settingsForm" onChange={handleSetSize} onSubmit={(e) => e.preventDefault()}>
       <label className= "settingsLabel" data-tooltip-id="tooltip" data-tooltip-content="sets the maximum height of each label in mm" >Height:</label>
-        <input className="settingsInput input" type="number" defaultValue={printParameters.height.current} name="height" min="0" max="9999" autocomplete="off" />
+        <input className="input settingsInput" type="number" defaultValue={printParameters.height.current} name="height" min="0" max="9999" autocomplete="off" />
     </form>
     
     <form className="settingsForm" onChange={handleSetSize}>
       <label className= "settingsLabel" data-tooltip-id="tooltip" data-tooltip-html="sets outline of each label <br>(spacing for non continous lines is broken)" >border style:</label>
-      <select className="settingsInput input" defaultValue={printParameters.border.current} name="border">  
+      <select className="input settingsInput" defaultValue={printParameters.border.current} name="border">  
         <option value="solid">Solid</option>
         <option value="none">None</option>
         <option value="dotted">Dotted</option>

@@ -3,6 +3,16 @@
 
 }
 
+div.controlls{
+  margin-left: auto;
+  padding-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 16px;
+  margin-right: 0;
+}
+
 
 .settings{
   border-style: solid;
@@ -32,18 +42,25 @@ button.closeButton{
 
 }
 
-.settingsInput{
-  margin-left: auto;
-  width: 7rem;
-  box-sizing: border-box;
-
-
-}
-
 .settingsLabel{
   display: flex;
   align-items: center;
+  text-align: left;
+  font-size: 1.5rem; 
+
 }
+
+
+.settingsInput{
+  /* TODO fix select width on left label linebreak */
+  margin-left: auto;
+  margin-bottom: 1px !important;
+  width: 10rem !important;
+  font-size: 1.5rem !important; 
+  box-sizing: border-box;
+
+}
+
 
 @keyframes popupAnimation {
   0% {
