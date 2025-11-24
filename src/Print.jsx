@@ -1,9 +1,10 @@
 
 export default function Print(items, parameters){
   var iframe = document.createElement("iframe");
-  parameters.width.current = (typeof parameters.width.current === 'undefined') ? Infinity : parameters.width.current;
-  parameters.height.current = (typeof parameters.height.current === 'undefined') ? Infinity : parameters.height.current;
   
+  parameters.width.current = (Number(parameters.width.current) === 0) ? Infinity : parameters.width.current;
+  parameters.height.current = (Number(parameters.height.current) === 0) ? Infinity : parameters.height.current;
+
   var html = `
   <!DOCTYPE html>
   <html>
