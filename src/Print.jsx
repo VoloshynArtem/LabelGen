@@ -31,7 +31,7 @@ export default function Print(items, parameters){
       body{
         display: flex;
         flex-wrap: wrap;
-        margin: 4.2 mm;
+        margin: ${parameters.margin.current}mm;
       }
       
     </style>
