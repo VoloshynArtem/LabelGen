@@ -1,0 +1,17 @@
+@media only screen and (max-width: 600px) {
+  .app{
+    grid-template-areas: 
+    'input'
+    'controlls' 
+    'list' !important; 
+  }
+
+  .controlls{
+    flex-direction: row;
+  }
+
+
+}
+
+
+

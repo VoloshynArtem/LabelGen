@@ -1,12 +1,13 @@
 div.list {
-    margin-top: 16px;
     display: flex;
     flex-direction: column;
     gap: 16px; 
     outline: none;
+    grid-area: list;
 }
 
 button.listButton {
+    height: 2lh;
     white-space: pre;
     transition: border 0.1s ease;
     transition: background 0.25s ease;

@@ -6,8 +6,8 @@ import LabelItemsContext from "./Context.jsx";
 import "./App.css";
 import "./List.css"
 import "./Input.css";
+import "./MediaQuerries.css";
 
-import TextareaAutosize from 'react-textarea-autosize';
 
 
 function App() {
@@ -17,14 +17,10 @@ function App() {
     
     <div className="app">
       <LabelItemsContext.Provider value={{ items, setitems }}>
-        
-        <div>
-          <Input />
-          <List />
-        </div>
-        
-        <Controlls />
       
+        <Input />
+        <Controlls />
+        <List />
       </LabelItemsContext.Provider>
 
 
@@ -35,7 +31,9 @@ function App() {
 
 function Input() {
   const { items, setitems } = useContext(LabelItemsContext);
-  
+  const inputarea = useRef(null);
+  const inputareaform = useRef(null);
+
   function handleSubmit(e) {
     e.preventDefault();
     
@@ -49,7 +47,7 @@ function Input() {
         ...previtems
       ]);
       e.target.reset();
-    
+      recalculateHeight();
     }
   }
   
@@ -61,12 +59,17 @@ function Input() {
 }
 
 
+  function recalculateHeight(){
+    const boxheight = (1 + inputarea.current.value.split('\n').length) + "lh";
+    inputarea.current.style.height = boxheight;
+    inputareaform.current.style.height = boxheight;
+
+  }
+
   return (
-    <div>
-      <form id="form" onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
-        <TextareaAutosize className="input" name="form" type="text"></TextareaAutosize>
-      </form>
-    </div>
+    <form id="form" ref={inputareaform} onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
+      <textarea ref={inputarea} onChange={recalculateHeight} className="input" name="form" type="text" />
+    </form>
   );
   
 }

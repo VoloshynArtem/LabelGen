@@ -3,16 +3,19 @@
 
 }
 
-div.controlls{
+.controlls{
   margin-left: auto;
-  padding-left: 1.5rem;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   gap: 16px;
   margin-right: 0;
+  grid-area: controlls;
 }
 
+.controlls>button{
+  height: 2lh;
+}
 
 .settings{
   border-style: solid;
