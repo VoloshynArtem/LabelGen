@@ -1,5 +1,6 @@
 import { useState, useContext, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 import Controlls from "./Controlls.jsx";
 import LabelItemsContext from "./Context.jsx";
@@ -23,7 +24,7 @@ function App() {
         <List />
       </LabelItemsContext.Provider>
 
-
+      <SpeedInsights />
     </div>
   );
 }
